@@ -90,10 +90,10 @@ const toastStore = useToastStore()
   padding: 0.75rem 1rem;
   background: var(--bg-elevated);
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: 10px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 24px rgba(var(--ink), 0.12);
 }
 
 @media (min-width: 640px) {
@@ -104,24 +104,24 @@ const toastStore = useToastStore()
 }
 
 .toast-success {
-  border-color: rgba(95, 197, 147, 0.25);
+  border-color: rgba(47, 157, 92, 0.3);
   box-shadow:
-    0 0 0 1px rgba(95, 197, 147, 0.06),
-    0 8px 30px rgba(0, 0, 0, 0.4);
+    0 0 0 1px rgba(47, 157, 92, 0.08),
+    0 8px 24px rgba(var(--ink), 0.12);
 }
 
 .toast-error {
-  border-color: rgba(242, 131, 122, 0.25);
+  border-color: rgba(214, 79, 67, 0.3);
   box-shadow:
-    0 0 0 1px rgba(242, 131, 122, 0.06),
-    0 8px 30px rgba(0, 0, 0, 0.4);
+    0 0 0 1px rgba(214, 79, 67, 0.08),
+    0 8px 24px rgba(var(--ink), 0.12);
 }
 
 .toast-info {
   border-color: var(--border-active);
   box-shadow:
     0 0 0 1px var(--accent-glow),
-    0 8px 30px rgba(0, 0, 0, 0.4);
+    0 8px 24px rgba(var(--ink), 0.12);
 }
 
 .toast-icon {

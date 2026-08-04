@@ -78,6 +78,6 @@ onMounted(load)
 .name { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .price { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); }
 
-.avail-btn { flex-shrink: 0; min-height: 42px; padding: 0 0.9rem; border-radius: 4px; font-family: 'Rajdhani', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
+.avail-btn { flex-shrink: 0; min-height: 42px; padding: 0 0.9rem; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
 .avail-btn.yes { background: var(--success-bg); border-color: rgba(95, 197, 147, 0.25); color: var(--success); }
 </style>

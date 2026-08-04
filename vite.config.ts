@@ -17,8 +17,8 @@ export default defineConfig({
         description: 'Confirmaciones y cobros de barra para Fragua47',
         start_url: '/',
         display: 'standalone',
-        background_color: '#10161a',
-        theme_color: '#2db3a4',
+        background_color: '#f1f8f6',
+        theme_color: '#1f8578',
         icons: [
           { src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
           { src: '/pwa-512x512.png', sizes: '512x512', type: 'image/png' },

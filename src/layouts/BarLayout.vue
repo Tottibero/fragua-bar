@@ -66,6 +66,7 @@ function handleLogout() {
   padding-top: env(safe-area-inset-top);
   background: var(--bg-elevated);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 8px rgba(var(--ink), 0.04);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -107,8 +108,8 @@ function handleLogout() {
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
   color: var(--text-muted);
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
@@ -116,7 +117,7 @@ function handleLogout() {
 
 .logout-btn:hover {
   color: var(--danger);
-  border-color: rgba(239, 68, 68, 0.3);
+  border-color: rgba(214, 79, 67, 0.3);
   background: var(--danger-bg);
 }
 
@@ -137,6 +138,7 @@ function handleLogout() {
   display: flex;
   background: var(--bg-elevated);
   border-top: 1px solid var(--border);
+  box-shadow: 0 -1px 8px rgba(var(--ink), 0.04);
   padding-bottom: env(safe-area-inset-bottom);
 }
 

@@ -111,12 +111,12 @@ onMounted(load)
 .header { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1rem; }
 .event-name { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
 .stats { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-.stat-chip { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 2px; color: var(--text-secondary); }
+.stat-chip { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; padding: 0.25rem 0.6rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 999px; color: var(--text-secondary); }
 .stat-chip.green { color: var(--success); border-color: rgba(95, 197, 147, 0.2); background: rgba(95, 197, 147, 0.06); }
 
 .search-wrap { position: relative; display: flex; align-items: center; }
 .search-icon { position: absolute; left: 0.6rem; color: var(--text-muted); pointer-events: none; }
-.search-input { width: 100%; padding: 0.7rem 0.75rem 0.7rem 2rem; background: var(--bg-elevated); border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; color: var(--text-primary); font-size: 0.9rem; outline: none; }
+.search-input { width: 100%; padding: 0.7rem 0.75rem 0.7rem 2rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 0.9rem; outline: none; }
 .search-input:focus { border-color: var(--border-active); }
 
 .state-loading { padding: 3rem; display: flex; justify-content: center; }
@@ -130,13 +130,13 @@ onMounted(load)
 .row-main { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
 .name { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .row-sub { display: flex; align-items: center; gap: 0.5rem; }
-.role-chip { display: inline-flex; padding: 0.14rem 0.45rem; border-radius: 2px; font-family: 'Rajdhani', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.role-chip { display: inline-flex; padding: 0.14rem 0.5rem; border-radius: 999px; font-family: 'Rajdhani', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 .role-chip.socio { color: #a78bfa; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); }
 .role-chip.usuario { color: var(--text-secondary); background: var(--bg-hover); border: 1px solid var(--border); }
 .payment { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--success); }
 .muted { color: var(--text-muted); font-size: 0.85rem; flex-shrink: 0; }
 
-.confirm-btn { flex-shrink: 0; min-height: 42px; padding: 0 0.9rem; border-radius: 4px; font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
+.confirm-btn { flex-shrink: 0; min-height: 42px; padding: 0 0.9rem; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
 .confirm-btn.yes { background: var(--success-bg); border-color: rgba(95, 197, 147, 0.25); color: var(--success); }
 .confirm-btn.locked { opacity: 0.6; cursor: not-allowed; }
 </style>

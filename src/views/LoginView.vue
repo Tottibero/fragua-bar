@@ -193,12 +193,10 @@ async function handleLogin() {
 
 .login-card {
   background: var(--bg-elevated);
-  border: 1px solid var(--border-mid);
-  border-radius: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 1.5rem;
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.05),
-    0 25px 70px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 16px 40px rgba(var(--ink), 0.1);
 }
 
 .login-card.shake {
@@ -279,7 +277,7 @@ async function handleLogin() {
   gap: 0.5rem;
   padding: 0.7rem 0.9rem;
   background: var(--danger-bg);
-  border: 1px solid rgba(242, 131, 122, 0.25);
+  border: 1px solid rgba(214, 79, 67, 0.25);
   border-radius: 6px;
   color: var(--danger);
   font-size: 0.83rem;
@@ -315,16 +313,16 @@ async function handleLogin() {
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-secondary);
 }
 
 .field-wrap {
   position: relative;
   display: flex;
   align-items: center;
-  background: var(--bg-surface);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   transition:
     border-color 0.2s,
     box-shadow 0.2s;
@@ -338,7 +336,7 @@ async function handleLogin() {
 .fi {
   position: absolute;
   left: 0.85rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   pointer-events: none;
 }
 
@@ -348,7 +346,7 @@ async function handleLogin() {
   background: transparent;
   border: none;
   outline: none;
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 1rem;
   font-family: 'JetBrains Mono', monospace;
 }
@@ -364,14 +362,14 @@ async function handleLogin() {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   transition: color 0.2s;
   display: flex;
   align-items: center;
 }
 
 .eye-btn:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
 }
 
 .submit-btn {
@@ -427,7 +425,7 @@ async function handleLogin() {
   text-align: center;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.66rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-muted);
   letter-spacing: 0.06em;
 }
 </style>
