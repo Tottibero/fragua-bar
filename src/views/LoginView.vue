@@ -234,11 +234,9 @@ async function handleLogin() {
 
 .brand-logo {
   flex-shrink: 0;
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
-  mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 45%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 45%, transparent 100%);
 }
 
 .brand-text {
