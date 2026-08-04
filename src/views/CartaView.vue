@@ -64,7 +64,7 @@ onMounted(load)
 
 <style scoped>
 .header { margin-bottom: 1rem; }
-.event-name { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+.event-name { font-family: 'Fredoka', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
 
 .state-loading { padding: 3rem; display: flex; justify-content: center; }
 .loading-bar { width: 160px; height: 2px; background: var(--bg-hover); border-radius: 1px; overflow: hidden; position: relative; }
@@ -76,8 +76,8 @@ onMounted(load)
 .drink-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 14px; padding: 0.75rem 0.9rem; }
 .row-main { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
 .name { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.price { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); }
+.price { font-family: 'Fredoka', sans-serif; font-size: 0.8rem; color: var(--accent); }
 
-.avail-btn { flex-shrink: 0; min-height: 48px; padding: 0 0.9rem; border-radius: 16px; font-family: 'Rajdhani', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
+.avail-btn { flex-shrink: 0; min-height: 48px; padding: 0 0.9rem; border-radius: 16px; font-family: 'Fredoka', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
 .avail-btn.yes { background: var(--success-bg); border-color: rgba(95, 197, 147, 0.25); color: var(--success); }
 </style>

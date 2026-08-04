@@ -342,7 +342,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 <style scoped>
 .page-header { }
 .title-line { display: flex; align-items: baseline; gap: 0.5rem; }
-.event-name-label { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+.event-name-label { font-family: 'Fredoka', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
 .search-wrap { position: relative; display: flex; align-items: center; width: 100%; }
 .search-icon { position: absolute; left: 0.55rem; color: var(--text-muted); pointer-events: none; flex-shrink: 0; }
 .search-input { padding: 0.7rem 0.75rem 0.7rem 1.9rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; color: var(--text-primary); font-size: 0.9rem; font-family: inherit; outline: none; width: 100%; transition: border-color 0.15s; }
@@ -367,22 +367,22 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 
 .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
 .card-name { font-size: 1.05rem; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
-.free-tag { font-family: 'Rajdhani', sans-serif; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; padding: 0.25rem 0.55rem; border-radius: 999px; white-space: nowrap; flex-shrink: 0; }
+.free-tag { font-family: 'Fredoka', sans-serif; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; padding: 0.25rem 0.55rem; border-radius: 999px; white-space: nowrap; flex-shrink: 0; }
 .free-tag--used { color: var(--success); background: var(--success-bg); border: 1px solid rgba(95, 197, 147, 0.2); }
 .free-tag--pending { color: var(--gold); background: var(--gold-glow); border: 1px solid rgba(217, 165, 68, 0.18); opacity: 0.75; }
 
 .card-stats { display: flex; align-items: stretch; background: var(--bg-elevated); border-radius: 16px; overflow: hidden; }
 .stat-block { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding: 0.7rem 0.4rem; }
 .stat-sep { width: 1px; background: var(--border); flex-shrink: 0; }
-.stat-val { font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; font-weight: 600; }
-.stat-label { font-family: 'Rajdhani', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.09em; color: var(--text-muted); }
-.al-dia { font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; color: var(--success); }
+.stat-val { font-family: 'Fredoka', sans-serif; font-size: 0.92rem; font-weight: 600; }
+.stat-label { font-family: 'Fredoka', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.09em; color: var(--text-muted); }
+.al-dia { font-family: 'Fredoka', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; color: var(--success); }
 .green { color: var(--success); }
 .amber { color: var(--accent); }
-.mono { font-family: 'JetBrains Mono', monospace; }
+.mono { font-family: 'Fredoka', sans-serif; }
 
 .card-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-.action-btn { flex: 1; min-width: 72px; min-height: 46px; padding: 0.6rem 0.5rem; border-radius: 16px; font-family: 'Rajdhani', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; cursor: pointer; transition: background 0.15s, box-shadow 0.15s; border: 1px solid transparent; }
+.action-btn { flex: 1; min-width: 72px; min-height: 46px; padding: 0.6rem 0.5rem; border-radius: 16px; font-family: 'Fredoka', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; cursor: pointer; transition: background 0.15s, box-shadow 0.15s; border: 1px solid transparent; }
 .btn-canjear { background: var(--gold-glow); border-color: rgba(217, 165, 68, 0.2); color: var(--gold); }
 .btn-canjear:hover { background: rgba(217, 165, 68, 0.2); border-color: rgba(217, 165, 68, 0.4); }
 .btn-add { background: var(--bg-hover); border-color: var(--border); color: var(--text-secondary); }
@@ -401,14 +401,14 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 .modal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.25rem 1rem; border-bottom: 1px solid var(--border); }
 .modal-header-info { display: flex; flex-direction: column; gap: 0.2rem; }
 .modal-name { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); }
-.modal-sub { font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; color: var(--text-muted); }
+.modal-sub { font-family: 'Fredoka', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; color: var(--text-muted); }
 .modal-sub.amber { color: var(--accent); }
 .modal-close { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: var(--bg-hover); border: 1px solid var(--border); border-radius: 16px; color: var(--text-muted); cursor: pointer; flex-shrink: 0; transition: background 0.15s, color 0.15s; }
 .modal-close:hover { background: var(--border); color: var(--text-primary); }
 
 .modal-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.875rem; }
 
-.field-label { font-family: 'Rajdhani', sans-serif; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.1em; color: var(--text-muted); margin: 0; }
+.field-label { font-family: 'Fredoka', sans-serif; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.1em; color: var(--text-muted); margin: 0; }
 
 .select-wrap { position: relative; }
 .fi-select { width: 100%; padding: 0.8rem 2.5rem 0.8rem 1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px; color: var(--text-primary); font-size: 0.95rem; cursor: pointer; appearance: none; outline: none; min-height: 50px; }
@@ -418,15 +418,15 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 .qty-control { display: flex; align-items: center; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
 .qty-btn { width: 56px; height: 56px; background: var(--bg-elevated); border: none; color: var(--text-secondary); font-size: 1.4rem; cursor: pointer; transition: background 0.12s, color 0.12s; display: flex; align-items: center; justify-content: center; }
 .qty-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
-.qty-val { flex: 1; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); background: var(--bg-base); line-height: 56px; }
+.qty-val { flex: 1; text-align: center; font-family: 'Fredoka', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); background: var(--bg-base); line-height: 56px; }
 
-.add-subtotal { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; color: var(--accent); padding: 0.25rem 0; }
+.add-subtotal { text-align: center; font-family: 'Fredoka', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--accent); padding: 0.25rem 0; }
 
-.fi-input { padding: 0.8rem 1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px; color: var(--text-primary); font-size: 1rem; outline: none; font-family: 'JetBrains Mono', monospace; transition: border-color 0.15s; }
+.fi-input { padding: 0.8rem 1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px; color: var(--text-primary); font-size: 1rem; outline: none; font-family: 'Fredoka', sans-serif; transition: border-color 0.15s; }
 .fi-input:focus { border-color: var(--border-active); }
 .fi-input--lg { width: 100%; font-size: 1.4rem; min-height: 56px; text-align: center; }
 
-.confirm-btn { width: 100%; min-height: 52px; padding: 0.875rem 1rem; margin-top: 0.25rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 100%); border: none; border-radius: 14px; color: #0a0c0f; font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; cursor: pointer; transition: box-shadow 0.2s, opacity 0.2s; }
+.confirm-btn { width: 100%; min-height: 52px; padding: 0.875rem 1rem; margin-top: 0.25rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 100%); border: none; border-radius: 14px; color: #ffffff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); font-family: 'Fredoka', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; cursor: pointer; transition: box-shadow 0.2s, opacity 0.2s; }
 .confirm-btn:hover:not(:disabled) { box-shadow: 0 6px 20px rgba(217, 165, 68, 0.35); }
 .confirm-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .confirm-btn--pay { background: linear-gradient(135deg, var(--success) 0%, var(--accent-warm) 100%); }
@@ -439,12 +439,12 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 .resumen-left { display: flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 0; }
 .resumen-drink { font-size: 0.95rem; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .resumen-right { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
-.resumen-qty { font-family: 'Rajdhani', sans-serif; font-size: 0.8rem; color: var(--text-muted); }
-.resumen-price { font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; min-width: 56px; text-align: right; }
-.resumen-total { display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; margin-top: 0.25rem; border-top: 1px solid var(--border-mid); font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-muted); }
-.resumen-total .mono { font-family: 'JetBrains Mono', monospace; font-size: 1rem; }
+.resumen-qty { font-family: 'Fredoka', sans-serif; font-size: 0.8rem; color: var(--text-muted); }
+.resumen-price { font-family: 'Fredoka', sans-serif; font-size: 0.88rem; min-width: 56px; text-align: right; }
+.resumen-total { display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; margin-top: 0.25rem; border-top: 1px solid var(--border-mid); font-family: 'Fredoka', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-muted); }
+.resumen-total .mono { font-family: 'Fredoka', sans-serif; font-size: 1rem; }
 
-.free-badge { display: inline-block; padding: 0.1rem 0.4rem; background: var(--success-bg); border: 1px solid rgba(95, 197, 147, 0.2); border-radius: 999px; font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em; color: var(--success); white-space: nowrap; }
+.free-badge { display: inline-block; padding: 0.1rem 0.4rem; background: var(--success-bg); border: 1px solid rgba(95, 197, 147, 0.2); border-radius: 999px; font-family: 'Fredoka', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em; color: var(--success); white-space: nowrap; }
 
 /* Modal transition */
 .modal-enter-active { transition: opacity 0.2s ease; }

@@ -97,7 +97,7 @@ defineEmits<{
 }
 
 .dialog-title {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -137,7 +137,7 @@ defineEmits<{
   border: 1px solid var(--border-mid);
   border-radius: 16px;
   color: var(--text-muted);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -163,7 +163,7 @@ defineEmits<{
   border: 1px solid rgba(214, 79, 67, 0.25);
   border-radius: 16px;
   color: var(--danger);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;

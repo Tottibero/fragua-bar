@@ -89,7 +89,7 @@ function handleLogout() {
 }
 
 .topbar-title {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -157,7 +157,7 @@ function handleLogout() {
 }
 
 .tab span {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.04em;

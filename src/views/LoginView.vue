@@ -246,7 +246,7 @@ async function handleLogin() {
 }
 
 .brand-main {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 1.7rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -255,7 +255,7 @@ async function handleLogin() {
 }
 
 .brand-suffix {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.3em;
@@ -307,7 +307,7 @@ async function handleLogin() {
 }
 
 .field-label {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -346,12 +346,12 @@ async function handleLogin() {
   outline: none;
   color: var(--text-primary);
   font-size: 1rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fredoka', sans-serif;
 }
 
 .field-wrap input::placeholder {
   color: var(--text-muted);
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-size: 0.88rem;
 }
 
@@ -377,8 +377,9 @@ async function handleLogin() {
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 100%);
   border: none;
   border-radius: 14px;
-  color: #0a0f11;
-  font-family: 'Rajdhani', sans-serif;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  font-family: 'Fredoka', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.13em;
@@ -421,7 +422,7 @@ async function handleLogin() {
 .login-footer {
   margin-top: 1.5rem;
   text-align: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fredoka', sans-serif;
   font-size: 0.76rem;
   color: var(--text-muted);
   letter-spacing: 0.06em;
