@@ -3,7 +3,7 @@
     <header class="topbar">
       <div class="topbar-brand">
         <img src="/logo.png" alt="" class="topbar-logo" />
-        <span class="topbar-title">{{ route.meta.title as string }}</span>
+        <span class="topbar-title">BAR - {{ route.meta.title as string }}</span>
       </div>
       <button class="logout-btn" @click="handleLogout" aria-label="Cerrar sesión">
         <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor">
