@@ -62,7 +62,7 @@ function handleLogout() {
 
 .topbar {
   flex-shrink: 0;
-  height: 56px;
+  height: 68px;
   padding-top: env(safe-area-inset-top);
   background: var(--bg-elevated);
   border-bottom: 1px solid var(--border);
@@ -81,10 +81,10 @@ function handleLogout() {
 }
 
 .topbar-logo {
-  width: 26px;
-  height: 26px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
-  border-radius: 18px;
+  border-radius: 12px;
   flex-shrink: 0;
 }
 
