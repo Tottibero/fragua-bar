@@ -112,7 +112,7 @@ onMounted(load)
 .event-name { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
 .stats { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .stat-chip { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; padding: 0.2rem 0.55rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 2px; color: var(--text-secondary); }
-.stat-chip.green { color: #34d399; border-color: rgba(52,211,153,0.2); background: rgba(52,211,153,0.06); }
+.stat-chip.green { color: var(--success); border-color: rgba(95, 197, 147, 0.2); background: rgba(95, 197, 147, 0.06); }
 
 .search-wrap { position: relative; display: flex; align-items: center; }
 .search-icon { position: absolute; left: 0.6rem; color: var(--text-muted); pointer-events: none; }
@@ -133,10 +133,10 @@ onMounted(load)
 .role-chip { display: inline-flex; padding: 0.14rem 0.45rem; border-radius: 2px; font-family: 'Rajdhani', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 .role-chip.socio { color: #a78bfa; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); }
 .role-chip.usuario { color: var(--text-secondary); background: var(--bg-hover); border: 1px solid var(--border); }
-.payment { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #34d399; }
+.payment { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--success); }
 .muted { color: var(--text-muted); font-size: 0.85rem; flex-shrink: 0; }
 
 .confirm-btn { flex-shrink: 0; min-height: 42px; padding: 0 0.9rem; border-radius: 4px; font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
-.confirm-btn.yes { background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.25); color: #34d399; }
+.confirm-btn.yes { background: var(--success-bg); border-color: rgba(95, 197, 147, 0.25); color: var(--success); }
 .confirm-btn.locked { opacity: 0.6; cursor: not-allowed; }
 </style>

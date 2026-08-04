@@ -104,23 +104,23 @@ const toastStore = useToastStore()
 }
 
 .toast-success {
-  border-color: rgba(16, 185, 129, 0.25);
+  border-color: rgba(95, 197, 147, 0.25);
   box-shadow:
-    0 0 0 1px rgba(16, 185, 129, 0.06),
+    0 0 0 1px rgba(95, 197, 147, 0.06),
     0 8px 30px rgba(0, 0, 0, 0.4);
 }
 
 .toast-error {
-  border-color: rgba(239, 68, 68, 0.25);
+  border-color: rgba(242, 131, 122, 0.25);
   box-shadow:
-    0 0 0 1px rgba(239, 68, 68, 0.06),
+    0 0 0 1px rgba(242, 131, 122, 0.06),
     0 8px 30px rgba(0, 0, 0, 0.4);
 }
 
 .toast-info {
-  border-color: rgba(240, 96, 32, 0.25);
+  border-color: var(--border-active);
   box-shadow:
-    0 0 0 1px rgba(240, 96, 32, 0.06),
+    0 0 0 1px var(--accent-glow),
     0 8px 30px rgba(0, 0, 0, 0.4);
 }
 

@@ -1,11 +1,6 @@
 <template>
   <div class="login-page">
-    <div class="bg-grid" aria-hidden="true"></div>
     <div class="bg-glow" aria-hidden="true"></div>
-
-    <div class="embers" aria-hidden="true">
-      <span v-for="n in 14" :key="n" class="ember" :style="getEmberStyle(n)"></span>
-    </div>
 
     <div class="login-wrapper">
       <div class="login-card" :class="{ shake: isShaking }">
@@ -141,17 +136,6 @@ const focused = ref<string | null>(null)
 const showPwd = ref(false)
 const isShaking = ref(false)
 
-function getEmberStyle(n: number) {
-  return {
-    left: `${(n * 7.1 + 3) % 100}%`,
-    animationDelay: `${((n * 0.6) % 4).toFixed(1)}s`,
-    animationDuration: `${3 + (n % 4)}s`,
-    width: `${2 + (n % 3)}px`,
-    height: `${2 + (n % 3)}px`,
-    opacity: `${0.3 + (n % 3) * 0.2}`,
-  }
-}
-
 async function handleLogin() {
   if (!form.value.identifier || !form.value.password) return
 
@@ -185,17 +169,7 @@ async function handleLogin() {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: #2d312f;
-}
-
-.bg-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(240, 96, 32, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(240, 96, 32, 0.04) 1px, transparent 1px);
-  background-size: 44px 44px;
-  pointer-events: none;
+  background: var(--bg-base);
 }
 
 .bg-glow {
@@ -205,41 +179,8 @@ async function handleLogin() {
   transform: translateX(-50%);
   width: 700px;
   height: 380px;
-  background: radial-gradient(ellipse, rgba(240, 96, 32, 0.2) 0%, transparent 65%);
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 65%);
   pointer-events: none;
-}
-
-.embers {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.ember {
-  position: absolute;
-  bottom: 8%;
-  border-radius: 50%;
-  background: #f06020;
-  animation: ember-rise linear infinite;
-  box-shadow: 0 0 5px #f06020;
-}
-
-@keyframes ember-rise {
-  0% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0;
-  }
-  8% {
-    opacity: 1;
-  }
-  85% {
-    opacity: 0.3;
-  }
-  100% {
-    transform: translateY(-72vh) translateX(18px) scale(0.2);
-    opacity: 0;
-  }
 }
 
 .login-wrapper {
@@ -251,12 +192,12 @@ async function handleLogin() {
 }
 
 .login-card {
-  background: #1e2422;
-  border: 1px solid rgba(240, 96, 32, 0.2);
-  border-radius: 3px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-mid);
+  border-radius: 8px;
   padding: 1.5rem;
   box-shadow:
-    0 0 0 1px rgba(240, 96, 32, 0.05),
+    0 0 0 1px rgba(0, 0, 0, 0.05),
     0 25px 70px rgba(0, 0, 0, 0.5);
 }
 
@@ -309,13 +250,12 @@ async function handleLogin() {
 }
 
 .brand-main {
-  font-family: 'Anton', Impact, sans-serif;
-  font-size: 1.9rem;
-  font-weight: 400;
-  letter-spacing: 0.06em;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   line-height: 1;
-  color: #c44a18;
-  text-shadow: 0 0 16px rgba(196, 74, 24, 0.3);
+  color: var(--text-primary);
 }
 
 .brand-suffix {
@@ -323,13 +263,13 @@ async function handleLogin() {
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.3em;
-  color: #ffffff;
+  color: var(--accent);
   opacity: 0.9;
 }
 
 .brand-divider {
   height: 1px;
-  background: linear-gradient(90deg, rgba(240, 96, 32, 0.35), transparent 70%);
+  background: linear-gradient(90deg, var(--border-mid), transparent 70%);
   margin-bottom: 1.5rem;
 }
 
@@ -339,9 +279,9 @@ async function handleLogin() {
   gap: 0.5rem;
   padding: 0.7rem 0.9rem;
   background: var(--danger-bg);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  border-radius: 2px;
-  color: #fca5a5;
+  border: 1px solid rgba(242, 131, 122, 0.25);
+  border-radius: 6px;
+  color: var(--danger);
   font-size: 0.83rem;
   margin-bottom: 1.25rem;
 }
@@ -384,7 +324,7 @@ async function handleLogin() {
   align-items: center;
   background: var(--bg-surface);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 2px;
+  border-radius: 6px;
   transition:
     border-color 0.2s,
     box-shadow 0.2s;
@@ -438,10 +378,10 @@ async function handleLogin() {
   margin-top: 0.35rem;
   padding: 1rem;
   min-height: 52px;
-  background: linear-gradient(135deg, #c44a18 0%, #8c2e0c 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 100%);
   border: none;
-  border-radius: 2px;
-  color: #ffffff;
+  border-radius: 6px;
+  color: #0a0f11;
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;

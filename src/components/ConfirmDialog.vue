@@ -65,11 +65,11 @@ defineEmits<{
   width: 100%;
   max-width: 380px;
   background: var(--bg-elevated);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(242, 131, 122, 0.2);
   border-radius: 3px;
   padding: 1.75rem;
   box-shadow:
-    0 0 0 1px rgba(239, 68, 68, 0.05),
+    0 0 0 1px rgba(242, 131, 122, 0.05),
     0 20px 60px rgba(0, 0, 0, 0.6);
   animation: dialog-in 0.2s ease-out;
 }
@@ -90,7 +90,7 @@ defineEmits<{
   height: 44px;
   border-radius: 50%;
   background: var(--danger-bg);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(242, 131, 122, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,7 +162,7 @@ defineEmits<{
   width: 100%;
   padding: 0.62rem 1.1rem;
   background: var(--danger-bg);
-  border: 1px solid rgba(239, 68, 68, 0.25);
+  border: 1px solid rgba(242, 131, 122, 0.25);
   border-radius: 2px;
   color: var(--danger);
   font-family: 'Rajdhani', sans-serif;
@@ -177,9 +177,9 @@ defineEmits<{
 }
 
 .confirm-btn:hover {
-  background: rgba(239, 68, 68, 0.2);
-  border-color: rgba(239, 68, 68, 0.4);
-  box-shadow: 0 2px 12px rgba(239, 68, 68, 0.2);
+  background: rgba(242, 131, 122, 0.2);
+  border-color: rgba(242, 131, 122, 0.4);
+  box-shadow: 0 2px 12px rgba(242, 131, 122, 0.2);
 }
 
 @media (min-width: 640px) {

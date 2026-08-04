@@ -368,27 +368,27 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
 .card-name { font-size: 1.05rem; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
 .free-tag { font-family: 'Rajdhani', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; padding: 0.25rem 0.5rem; border-radius: 2px; white-space: nowrap; flex-shrink: 0; }
-.free-tag--used { color: #34d399; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.2); }
-.free-tag--pending { color: var(--accent); background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.18); opacity: 0.75; }
+.free-tag--used { color: var(--success); background: var(--success-bg); border: 1px solid rgba(95, 197, 147, 0.2); }
+.free-tag--pending { color: var(--gold); background: var(--gold-glow); border: 1px solid rgba(217, 165, 68, 0.18); opacity: 0.75; }
 
 .card-stats { display: flex; align-items: stretch; background: var(--bg-elevated); border-radius: 4px; overflow: hidden; }
 .stat-block { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding: 0.7rem 0.4rem; }
 .stat-sep { width: 1px; background: var(--border); flex-shrink: 0; }
 .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; font-weight: 600; }
 .stat-label { font-family: 'Rajdhani', sans-serif; font-size: 0.56rem; font-weight: 600; letter-spacing: 0.09em; color: var(--text-muted); }
-.al-dia { font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; color: #34d399; }
-.green { color: #34d399; }
+.al-dia { font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; color: var(--success); }
+.green { color: var(--success); }
 .amber { color: var(--accent); }
 .mono { font-family: 'JetBrains Mono', monospace; }
 
 .card-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .action-btn { flex: 1; min-width: 72px; min-height: 46px; padding: 0.6rem 0.5rem; border-radius: 4px; font-family: 'Rajdhani', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; cursor: pointer; transition: background 0.15s, box-shadow 0.15s; border: 1px solid transparent; }
-.btn-canjear { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.2); color: var(--accent); }
-.btn-canjear:hover { background: rgba(245,158,11,0.2); border-color: rgba(245,158,11,0.4); }
+.btn-canjear { background: var(--gold-glow); border-color: rgba(217, 165, 68, 0.2); color: var(--gold); }
+.btn-canjear:hover { background: rgba(217, 165, 68, 0.2); border-color: rgba(217, 165, 68, 0.4); }
 .btn-add { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.09); color: var(--text-secondary); }
 .btn-add:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
-.btn-pay { background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.2); color: #34d399; }
-.btn-pay:hover { background: rgba(52,211,153,0.18); border-color: rgba(52,211,153,0.35); }
+.btn-pay { background: var(--success-bg); border-color: rgba(95, 197, 147, 0.2); color: var(--success); }
+.btn-pay:hover { background: rgba(95, 197, 147, 0.18); border-color: rgba(95, 197, 147, 0.35); }
 .btn-summary { background: transparent; border-color: rgba(255,255,255,0.07); color: var(--text-muted); }
 .btn-summary:hover { background: rgba(255,255,255,0.12); color: var(--text-secondary); }
 
@@ -427,10 +427,10 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 .fi-input--lg { width: 100%; font-size: 1.4rem; min-height: 56px; text-align: center; }
 
 .confirm-btn { width: 100%; min-height: 52px; padding: 0.875rem 1rem; margin-top: 0.25rem; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 100%); border: none; border-radius: 6px; color: #0a0c0f; font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; cursor: pointer; transition: box-shadow 0.2s, opacity 0.2s; }
-.confirm-btn:hover:not(:disabled) { box-shadow: 0 6px 20px rgba(245,158,11,0.35); }
+.confirm-btn:hover:not(:disabled) { box-shadow: 0 6px 20px rgba(217, 165, 68, 0.35); }
 .confirm-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.confirm-btn--pay { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
-.confirm-btn--pay:hover:not(:disabled) { box-shadow: 0 6px 20px rgba(52,211,153,0.3); }
+.confirm-btn--pay { background: linear-gradient(135deg, var(--success) 0%, var(--accent-warm) 100%); }
+.confirm-btn--pay:hover:not(:disabled) { box-shadow: 0 6px 20px rgba(95, 197, 147, 0.3); }
 
 /* Resumen */
 .resumen-empty { text-align: center; color: var(--text-muted); font-size: 0.88rem; padding: 1rem 0; }
@@ -444,7 +444,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 .resumen-total { display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; margin-top: 0.25rem; border-top: 1px solid var(--border-mid); font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-muted); }
 .resumen-total .mono { font-family: 'JetBrains Mono', monospace; font-size: 1rem; }
 
-.free-badge { display: inline-block; padding: 0.1rem 0.35rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.2); border-radius: 2px; font-family: 'Rajdhani', sans-serif; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.07em; color: #34d399; white-space: nowrap; }
+.free-badge { display: inline-block; padding: 0.1rem 0.35rem; background: var(--success-bg); border: 1px solid rgba(95, 197, 147, 0.2); border-radius: 2px; font-family: 'Rajdhani', sans-serif; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.07em; color: var(--success); white-space: nowrap; }
 
 /* Modal transition */
 .modal-enter-active { transition: opacity 0.2s ease; }

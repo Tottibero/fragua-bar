@@ -123,7 +123,7 @@ function handleLogout() {
 .accent-line {
   height: 2px;
   flex-shrink: 0;
-  background: linear-gradient(90deg, var(--accent) 0%, rgba(240, 96, 32, 0.25) 35%, transparent 65%);
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-glow) 35%, transparent 65%);
 }
 
 .content {
