@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-base: #191e1c;
+  --bg-surface: #1e2422;
+  --bg-elevated: #252b28;
+  --bg-hover: #2d312f;
+  --border: rgba(196, 74, 24, 0.12);
+  --border-mid: rgba(196, 74, 24, 0.22);
+  --border-active: rgba(196, 74, 24, 0.5);
+  --accent: #c44a18;
+  --accent-warm: #8c2e0c;
+  --accent-glow: rgba(196, 74, 24, 0.12);
+  --text-primary: #f1f5f9;
+  --text-secondary: #a8bdb9;
+  --text-muted: #6b8c87;
+  --danger: #ef4444;
+  --danger-bg: rgba(239, 68, 68, 0.1);
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.1);
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
+}
+
+#app {
+  height: 100%;
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: #2d3748;
+  border-radius: 3px;
+}
