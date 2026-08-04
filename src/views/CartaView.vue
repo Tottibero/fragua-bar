@@ -73,11 +73,11 @@ onMounted(load)
 .state-empty { padding: 3rem 1rem; text-align: center; color: var(--text-secondary); font-size: 0.92rem; }
 
 .drink-list { display: flex; flex-direction: column; gap: 0.5rem; }
-.drink-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 0.9rem; }
+.drink-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 14px; padding: 0.75rem 0.9rem; }
 .row-main { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
 .name { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .price { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); }
 
-.avail-btn { flex-shrink: 0; min-height: 42px; padding: 0 0.9rem; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
+.avail-btn { flex-shrink: 0; min-height: 48px; padding: 0 0.9rem; border-radius: 16px; font-family: 'Rajdhani', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
 .avail-btn.yes { background: var(--success-bg); border-color: rgba(95, 197, 147, 0.25); color: var(--success); }
 </style>

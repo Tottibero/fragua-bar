@@ -84,7 +84,7 @@ function handleLogout() {
   width: 26px;
   height: 26px;
   object-fit: contain;
-  border-radius: 5px;
+  border-radius: 18px;
   flex-shrink: 0;
 }
 
@@ -109,7 +109,7 @@ function handleLogout() {
   justify-content: center;
   background: transparent;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 14px;
   color: var(--text-muted);
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
@@ -158,7 +158,7 @@ function handleLogout() {
 
 .tab span {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.04em;
 }

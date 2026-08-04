@@ -31,12 +31,19 @@
   --gold-glow: rgba(184, 132, 47, 0.09);
 }
 
+html {
+  /* Base bump from the browser default (16px) so every rem-based size,
+     padding and gap in the app scales up together for readability. */
+  font-size: 18px;
+}
+
 html,
 body {
   height: 100%;
   font-family: 'IBM Plex Sans', sans-serif;
   background: var(--bg-base);
   color: var(--text-primary);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: none;
@@ -51,6 +58,16 @@ button,
 select,
 textarea {
   font-family: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
 }
 
 ::-webkit-scrollbar {

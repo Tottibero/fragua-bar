@@ -66,7 +66,7 @@ defineEmits<{
   max-width: 380px;
   background: var(--bg-elevated);
   border: 1px solid rgba(214, 79, 67, 0.2);
-  border-radius: 12px;
+  border-radius: 20px;
   padding: 1.75rem;
   box-shadow: 0 20px 50px rgba(var(--ink), 0.16);
   animation: dialog-in 0.2s ease-out;
@@ -135,7 +135,7 @@ defineEmits<{
   padding: 0.62rem 1.1rem;
   background: transparent;
   border: 1px solid var(--border-mid);
-  border-radius: 8px;
+  border-radius: 16px;
   color: var(--text-muted);
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.78rem;
@@ -161,7 +161,7 @@ defineEmits<{
   padding: 0.62rem 1.1rem;
   background: var(--danger-bg);
   border: 1px solid rgba(214, 79, 67, 0.25);
-  border-radius: 8px;
+  border-radius: 16px;
   color: var(--danger);
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.78rem;

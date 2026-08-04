@@ -194,7 +194,7 @@ async function handleLogin() {
 .login-card {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 20px;
   padding: 1.5rem;
   box-shadow: 0 16px 40px rgba(var(--ink), 0.1);
 }
@@ -278,7 +278,7 @@ async function handleLogin() {
   padding: 0.7rem 0.9rem;
   background: var(--danger-bg);
   border: 1px solid rgba(214, 79, 67, 0.25);
-  border-radius: 6px;
+  border-radius: 14px;
   color: var(--danger);
   font-size: 0.83rem;
   margin-bottom: 1.25rem;
@@ -310,7 +310,7 @@ async function handleLogin() {
 
 .field-label {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   color: var(--text-secondary);
@@ -322,7 +322,7 @@ async function handleLogin() {
   align-items: center;
   background: var(--bg-base);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 16px;
   transition:
     border-color 0.2s,
     box-shadow 0.2s;
@@ -378,7 +378,7 @@ async function handleLogin() {
   min-height: 52px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 100%);
   border: none;
-  border-radius: 6px;
+  border-radius: 14px;
   color: #0a0f11;
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.9rem;
@@ -424,7 +424,7 @@ async function handleLogin() {
   margin-top: 1.5rem;
   text-align: center;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.66rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
   letter-spacing: 0.06em;
 }

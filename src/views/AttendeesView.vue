@@ -116,7 +116,7 @@ onMounted(load)
 
 .search-wrap { position: relative; display: flex; align-items: center; }
 .search-icon { position: absolute; left: 0.6rem; color: var(--text-muted); pointer-events: none; }
-.search-input { width: 100%; padding: 0.7rem 0.75rem 0.7rem 2rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 0.9rem; outline: none; }
+.search-input { width: 100%; padding: 0.7rem 0.75rem 0.7rem 2rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; color: var(--text-primary); font-size: 0.9rem; outline: none; }
 .search-input:focus { border-color: var(--border-active); }
 
 .state-loading { padding: 3rem; display: flex; justify-content: center; }
@@ -126,17 +126,17 @@ onMounted(load)
 .state-empty { padding: 3rem 1rem; text-align: center; color: var(--text-secondary); font-size: 0.92rem; }
 
 .attendee-list { display: flex; flex-direction: column; gap: 0.5rem; }
-.attendee-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 0.9rem; }
+.attendee-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 14px; padding: 0.75rem 0.9rem; }
 .row-main { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
 .name { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .row-sub { display: flex; align-items: center; gap: 0.5rem; }
-.role-chip { display: inline-flex; padding: 0.14rem 0.5rem; border-radius: 999px; font-family: 'Rajdhani', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.role-chip { display: inline-flex; padding: 0.14rem 0.5rem; border-radius: 999px; font-family: 'Rajdhani', sans-serif; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 .role-chip.socio { color: #a78bfa; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); }
 .role-chip.usuario { color: var(--text-secondary); background: var(--bg-hover); border: 1px solid var(--border); }
 .payment { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--success); }
 .muted { color: var(--text-muted); font-size: 0.85rem; flex-shrink: 0; }
 
-.confirm-btn { flex-shrink: 0; min-height: 42px; padding: 0 0.9rem; border-radius: 8px; font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
+.confirm-btn { flex-shrink: 0; min-height: 48px; padding: 0 0.9rem; border-radius: 16px; font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; border: 1px solid rgba(100,116,139,0.2); background: rgba(100,116,139,0.08); color: var(--text-muted); transition: all 0.15s; white-space: nowrap; }
 .confirm-btn.yes { background: var(--success-bg); border-color: rgba(95, 197, 147, 0.25); color: var(--success); }
 .confirm-btn.locked { opacity: 0.6; cursor: not-allowed; }
 </style>

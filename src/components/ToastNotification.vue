@@ -90,7 +90,7 @@ const toastStore = useToastStore()
   padding: 0.75rem 1rem;
   background: var(--bg-elevated);
   border: 1px solid transparent;
-  border-radius: 10px;
+  border-radius: 18px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(var(--ink), 0.12);
@@ -165,7 +165,7 @@ const toastStore = useToastStore()
   color: var(--text-muted);
   display: flex;
   align-items: center;
-  border-radius: 2px;
+  border-radius: 18px;
   transition: color 0.2s;
 }
 
