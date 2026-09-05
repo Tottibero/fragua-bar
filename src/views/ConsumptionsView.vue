@@ -129,7 +129,7 @@
             <div v-else-if="activeAction === 'resumen'" class="modal-body">
               <div v-if="activeResumen.length === 0" class="resumen-empty">Sin consumiciones registradas</div>
               <template v-else>
-                <div v-for="line in activeResumen" :key="`${line.eventDrinkId}-${line.isFree}`" class="resumen-line">
+                <div v-for="line in activeResumen" :key="line.id" class="resumen-line">
                   <div class="resumen-left">
                     <span class="resumen-drink">{{ line.drinkName }}</span>
                     <span v-if="line.isFree" class="free-badge">GRATIS</span>
@@ -138,6 +138,9 @@
                     <span class="resumen-qty">× {{ line.quantity }}</span>
                     <span v-if="line.isFree" class="resumen-price green">0.00 €</span>
                     <span v-else class="resumen-price amber">{{ line.subtotal.toFixed(2) }} €</span>
+                    <button class="resumen-del" title="Eliminar" @click="askDeleteConsumption(line)">
+                      <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                    </button>
                   </div>
                 </div>
                 <div class="resumen-total">
@@ -152,6 +155,15 @@
       </Transition>
     </Teleport>
   </BarLayout>
+
+  <ConfirmDialog
+    v-if="pendingDeleteConsumption"
+    title="Eliminar consumición"
+    :message="`¿Eliminar <strong>${pendingDeleteConsumption.quantity}× ${pendingDeleteConsumption.drinkName}</strong>? Esta acción no se puede deshacer.`"
+    confirmLabel="ELIMINAR"
+    @confirm="confirmDeleteConsumption"
+    @cancel="pendingDeleteConsumption = null"
+  />
 </template>
 
 <script setup lang="ts">
@@ -161,6 +173,7 @@ import { useToastStore } from '@/stores/toast'
 import { activeEventService } from '@/services/active-event.service'
 import { paymentsService } from '@/services/payments.service'
 import BarLayout from '@/layouts/BarLayout.vue'
+import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import type { ConsumptionsResponse, Attendee } from '@/types'
 
 const toast = useToastStore()
@@ -242,6 +255,7 @@ const activeResumen = computed(() => {
       const ed = drinkMap.get(c.eventDrinkId)
       const unitPrice = parseFloat(ed?.price ?? '0')
       return {
+        id: c.id,
         eventDrinkId: c.eventDrinkId,
         drinkName: ed?.drink?.name ?? '—',
         quantity: c.quantity,
@@ -251,6 +265,23 @@ const activeResumen = computed(() => {
       }
     })
 })
+
+const pendingDeleteConsumption = ref<{ id: string; drinkName: string; quantity: number } | null>(null)
+
+function askDeleteConsumption(line: { id: string; drinkName: string; quantity: number }) {
+  pendingDeleteConsumption.value = line
+}
+
+async function confirmDeleteConsumption() {
+  const line = pendingDeleteConsumption.value
+  if (!line) return
+  pendingDeleteConsumption.value = null
+  try {
+    await activeEventService.deleteConsumption(line.id)
+    data.value = await activeEventService.getConsumptions()
+    toast.success('Consumición eliminada.')
+  } catch (e) { toast.error(err(e, 'Error al eliminar la consumición.')) }
+}
 
 function drinkPrice(eventDrinkId: string) {
   const ed = data.value?.eventDrinks.find(d => d.id === eventDrinkId)
@@ -441,6 +472,8 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 .resumen-right { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
 .resumen-qty { font-family: 'Fredoka', sans-serif; font-size: 0.8rem; color: var(--text-muted); }
 .resumen-price { font-family: 'Fredoka', sans-serif; font-size: 0.88rem; min-width: 56px; text-align: right; }
+.resumen-del { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; flex-shrink: 0; background: var(--danger-bg); border: 1px solid rgba(214, 79, 67, 0.2); border-radius: 10px; color: var(--danger); cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+.resumen-del:hover { background: rgba(214, 79, 67, 0.2); border-color: rgba(214, 79, 67, 0.4); }
 .resumen-total { display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; margin-top: 0.25rem; border-top: 1px solid var(--border-mid); font-family: 'Fredoka', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-muted); }
 .resumen-total .mono { font-family: 'Fredoka', sans-serif; font-size: 1rem; }
 

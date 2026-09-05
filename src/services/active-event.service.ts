@@ -29,4 +29,6 @@ export const activeEventService = {
     api.get(`${B}/consumptions`).then(r => r.data),
   addConsumption: (p: CreateConsumptionPayload): Promise<Consumption> =>
     api.post(`${B}/consumptions`, p).then(r => r.data),
+  deleteConsumption: (cid: string): Promise<void> =>
+    api.delete(`${B}/consumptions/${cid}`).then(r => r.data),
 }
