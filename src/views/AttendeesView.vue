@@ -4,7 +4,7 @@
       <p v-if="eventName" class="event-name">{{ eventName }}</p>
       <p v-if="data" class="stats">
         <span class="stat-chip">👥 {{ data.nonMemberCount }} no socios</span>
-        <span class="stat-chip green">{{ data.totalRevenue.toFixed(2) }} € recaudados</span>
+        <span class="stat-chip green">{{ confirmedNonMemberRevenue.toFixed(2) }} € recaudados</span>
       </p>
       <div class="search-wrap">
         <svg class="search-icon" width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
@@ -64,6 +64,13 @@ const filteredAttendees = computed(() => {
   const q = searchQuery.value.trim().toLowerCase()
   if (!q || !data.value) return data.value?.attendees ?? []
   return data.value.attendees.filter(a => a.nickname.toLowerCase().includes(q))
+})
+
+const confirmedNonMemberRevenue = computed(() => {
+  if (!data.value) return 0
+  return data.value.attendees
+    .filter(a => a.role === 'usuario' && a.confirmed && a.payment)
+    .reduce((sum, a) => sum + parseFloat(a.payment!.amount), 0)
 })
 
 function err(e: unknown, fallback: string) {
