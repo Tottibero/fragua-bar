@@ -138,7 +138,7 @@
                     <span class="resumen-qty">× {{ line.quantity }}</span>
                     <span v-if="line.isFree" class="resumen-price green">0.00 €</span>
                     <span v-else class="resumen-price amber">{{ line.subtotal.toFixed(2) }} €</span>
-                    <button class="resumen-del" title="Eliminar" @click="askDeleteConsumption(line)">
+                    <button class="resumen-del" title="Eliminar" :disabled="deletingConsumptionId === line.id" @click="askDeleteConsumption(line)">
                       <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
                     </button>
                   </div>
@@ -267,6 +267,7 @@ const activeResumen = computed(() => {
 })
 
 const pendingDeleteConsumption = ref<{ id: string; drinkName: string; quantity: number } | null>(null)
+const deletingConsumptionId = ref<string | null>(null)
 
 function askDeleteConsumption(line: { id: string; drinkName: string; quantity: number }) {
   pendingDeleteConsumption.value = line
@@ -276,11 +277,13 @@ async function confirmDeleteConsumption() {
   const line = pendingDeleteConsumption.value
   if (!line) return
   pendingDeleteConsumption.value = null
+  deletingConsumptionId.value = line.id
   try {
     await activeEventService.deleteConsumption(line.id)
     data.value = await activeEventService.getConsumptions()
     toast.success('Consumición eliminada.')
   } catch (e) { toast.error(err(e, 'Error al eliminar la consumición.')) }
+  finally { deletingConsumptionId.value = null }
 }
 
 function drinkPrice(eventDrinkId: string) {
@@ -473,7 +476,8 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 .resumen-qty { font-family: 'Fredoka', sans-serif; font-size: 0.8rem; color: var(--text-muted); }
 .resumen-price { font-family: 'Fredoka', sans-serif; font-size: 0.88rem; min-width: 56px; text-align: right; }
 .resumen-del { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; flex-shrink: 0; background: var(--danger-bg); border: 1px solid rgba(214, 79, 67, 0.2); border-radius: 10px; color: var(--danger); cursor: pointer; transition: background 0.15s, border-color 0.15s; }
-.resumen-del:hover { background: rgba(214, 79, 67, 0.2); border-color: rgba(214, 79, 67, 0.4); }
+.resumen-del:hover:not(:disabled) { background: rgba(214, 79, 67, 0.2); border-color: rgba(214, 79, 67, 0.4); }
+.resumen-del:disabled { opacity: 0.4; cursor: not-allowed; }
 .resumen-total { display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; margin-top: 0.25rem; border-top: 1px solid var(--border-mid); font-family: 'Fredoka', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-muted); }
 .resumen-total .mono { font-family: 'Fredoka', sans-serif; font-size: 1rem; }
 
