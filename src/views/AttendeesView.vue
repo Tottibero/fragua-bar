@@ -17,9 +17,12 @@
     <div v-else-if="data && data.attendees.length === 0" class="state-empty"><p>Sin asistentes aún</p></div>
     <div v-else-if="filteredAttendees.length === 0" class="state-empty"><p>Sin resultados para "{{ searchQuery }}"</p></div>
     <div v-else class="attendee-list">
-      <div v-for="a in nonMemberAttendees" :key="a.id" class="attendee-row">
+      <div v-for="(a, index) in unpaidNonMemberAttendees" :key="a.id" class="attendee-row">
         <div class="row-main">
-          <span class="name">{{ a.nickname }}</span>
+          <div class="row-title">
+            <span class="attendee-number">{{ index + 1 }}</span>
+            <span class="name">{{ a.nickname }}</span>
+          </div>
           <div class="row-sub">
             <span class="role-chip" :class="a.role === 'socio' ? 'socio' : 'usuario'">{{ a.role }}</span>
             <span v-if="a.payment" class="payment">{{ parseFloat(a.payment.amount).toFixed(2) }} €</span>
@@ -31,6 +34,33 @@
         <span v-else class="muted">—</span>
       </div>
 
+      <details v-if="paidNonMemberAttendees.length" class="member-group paid-group">
+        <summary class="member-group-summary">
+          <span>Entradas pagadas</span>
+          <span class="member-count">{{ paidNonMemberAttendees.length }}</span>
+          <svg class="member-group-chevron" width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="m5 7.5 5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </summary>
+        <div class="member-list">
+          <div v-for="(a, index) in paidNonMemberAttendees" :key="a.id" class="attendee-row">
+            <div class="row-main">
+              <div class="row-title">
+                <span class="attendee-number">{{ unpaidNonMemberAttendees.length + index + 1 }}</span>
+                <span class="name">{{ a.nickname }}</span>
+              </div>
+              <div class="row-sub">
+                <span class="role-chip usuario">{{ a.role }}</span>
+                <span class="payment">{{ parseFloat(a.payment!.amount).toFixed(2) }} €</span>
+              </div>
+            </div>
+            <button class="confirm-btn" :class="{ yes: a.confirmed, locked: true }" @click="toggleConfirm(a)">
+              {{ a.confirmed ? '✓ CONFIRMADO' : 'CONFIRMAR' }}
+            </button>
+          </div>
+        </div>
+      </details>
+
       <details v-if="memberAttendees.length" class="member-group">
         <summary class="member-group-summary">
           <span>Socios</span>
@@ -40,9 +70,12 @@
           </svg>
         </summary>
         <div class="member-list">
-          <div v-for="a in memberAttendees" :key="a.id" class="attendee-row">
+          <div v-for="(a, index) in memberAttendees" :key="a.id" class="attendee-row">
             <div class="row-main">
-              <span class="name">{{ a.nickname }}</span>
+              <div class="row-title">
+                <span class="attendee-number">{{ unpaidNonMemberAttendees.length + paidNonMemberAttendees.length + index + 1 }}</span>
+                <span class="name">{{ a.nickname }}</span>
+              </div>
               <div class="row-sub">
                 <span class="role-chip socio">{{ a.role }}</span>
                 <span v-if="a.payment" class="payment">{{ parseFloat(a.payment.amount).toFixed(2) }} €</span>
@@ -88,8 +121,12 @@ const filteredAttendees = computed(() => {
   return data.value.attendees.filter(a => a.nickname.toLowerCase().includes(q))
 })
 
-const nonMemberAttendees = computed(() =>
-  filteredAttendees.value.filter(a => a.role !== 'socio')
+const unpaidNonMemberAttendees = computed(() =>
+  filteredAttendees.value.filter(a => a.role === 'usuario' && a.payment === null)
+)
+
+const paidNonMemberAttendees = computed(() =>
+  filteredAttendees.value.filter(a => a.role === 'usuario' && a.payment !== null)
 )
 
 const memberAttendees = computed(() =>
@@ -168,11 +205,14 @@ onMounted(load)
 .member-group-summary::-webkit-details-marker { display: none; }
 .member-group-summary:focus-visible { outline: 2px solid var(--border-active); outline-offset: -2px; }
 .member-count { color: #a78bfa; font-size: 0.75rem; }
+.paid-group .member-count { color: var(--success); }
 .member-group-chevron { margin-left: auto; color: var(--text-muted); transition: transform 0.15s ease; }
 .member-group[open] .member-group-chevron { transform: rotate(180deg); }
 .member-list { display: flex; flex-direction: column; gap: 0.5rem; padding: 0 0.5rem 0.5rem; }
 .attendee-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 14px; padding: 0.75rem 0.9rem; }
 .row-main { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+.row-title { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.attendee-number { display: inline-flex; align-items: center; justify-content: center; min-width: 1.4rem; color: var(--text-muted); font-family: 'Fredoka', sans-serif; font-size: 0.75rem; font-weight: 600; font-variant-numeric: tabular-nums; }
 .name { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .row-sub { display: flex; align-items: center; gap: 0.5rem; }
 .role-chip { display: inline-flex; padding: 0.14rem 0.5rem; border-radius: 999px; font-family: 'Fredoka', sans-serif; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }

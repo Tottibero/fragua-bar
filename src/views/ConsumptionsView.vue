@@ -26,7 +26,7 @@
     <template v-else>
       <div v-if="filteredSummary.length === 0" class="state-empty"><p>Sin resultados para "{{ searchQuery }}"</p></div>
       <div v-else class="card-grid">
-      <div v-for="row in filteredSummary" :key="row.attendeeId" class="attendee-card">
+      <div v-for="row in filteredSummary" :key="row.attendeeId" class="attendee-card" :class="{ 'attendee-card--unpaid-entry': row.hasUnpaidEntry }">
         <div class="card-header">
           <span class="card-name">{{ row.nickname }}</span>
           <span v-if="freeConsumption" :class="['free-tag', row.freeUsed ? 'free-tag--used' : 'free-tag--pending']">
@@ -228,7 +228,7 @@ const summary = computed(() => {
     const price = parseFloat(drinkMap.get(c.eventDrinkId)?.price ?? '0')
     consumedByAttendee.set(c.attendeeId, (consumedByAttendee.get(c.attendeeId) ?? 0) + c.quantity * price)
   }
-  return attendees.value.filter(a => a.role === 'socio' || a.payment !== null).map(a => {
+  return attendees.value.map(a => {
     const totalConsumed = consumedByAttendee.get(a.id) ?? 0
     const totalPaid = paidByUser.get(a.userId) ?? 0
     return {
@@ -238,6 +238,7 @@ const summary = computed(() => {
       totalConsumed,
       totalPaid,
       pending: Math.max(0, totalConsumed - totalPaid),
+      hasUnpaidEntry: a.role === 'usuario' && a.payment === null,
       freeUsed: a.freeConsumptionUsed,
       hasConsumptions: attendeesWithConsumptions.has(a.id),
     }
@@ -398,6 +399,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeyDown))
 
 /* Card */
 .attendee-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem; display: flex; flex-direction: column; gap: 1rem; }
+.attendee-card--unpaid-entry { background: rgba(214, 79, 67, 0.16); border-color: rgba(214, 79, 67, 0.65); }
 
 .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
 .card-name { font-size: 1.05rem; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
