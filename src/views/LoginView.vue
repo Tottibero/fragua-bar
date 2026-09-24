@@ -115,6 +115,36 @@
 
         <p class="login-footer">Acceso restringido · Solo personal autorizado</p>
       </div>
+
+      <nav class="product-links" aria-label="Aplicaciones Fragua47">
+        <a
+          href="https://eventos.fragua47.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="product-link"
+        >
+          <img src="/fraguaevents.png" alt="" class="product-logo" />
+          <span>Eventos</span>
+        </a>
+        <a
+          href="https://documentos.fragua47.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="product-link"
+        >
+          <img src="/fragua-documentos.png" alt="" class="product-logo" />
+          <span>Documentos</span>
+        </a>
+        <a
+          href="https://gestion.fragua47.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="product-link"
+        >
+          <img src="/fragua-gestion.png" alt="" class="product-logo" />
+          <span>Gestión</span>
+        </a>
+      </nav>
     </div>
   </div>
 </template>
@@ -426,5 +456,63 @@ async function handleLogin() {
   font-size: 0.76rem;
   color: var(--text-muted);
   letter-spacing: 0.06em;
+}
+
+.product-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.product-link {
+  display: flex;
+  min-height: 104px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.75rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 6px 18px rgba(var(--ink), 0.05);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.product-link:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-active);
+  box-shadow: 0 10px 22px rgba(var(--ink), 0.09);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.product-logo {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+}
+
+@media (max-width: 560px) {
+  .product-links {
+    gap: 0.5rem;
+  }
+
+  .product-link {
+    min-height: 92px;
+    border-radius: 15px;
+    font-size: 0.78rem;
+  }
+
+  .product-logo {
+    width: 46px;
+    height: 46px;
+  }
 }
 </style>
