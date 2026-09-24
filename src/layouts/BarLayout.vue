@@ -5,7 +5,9 @@
         <img src="/logo.png" alt="" class="topbar-logo" />
         <span class="topbar-title">BAR - {{ route.meta.title as string }}</span>
       </div>
-      <button class="logout-btn" @click="handleLogout" aria-label="Cerrar sesión">
+      <div class="topbar-actions">
+        <SyncStatus />
+        <button class="logout-btn" @click="handleLogout" aria-label="Cerrar sesión">
         <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor">
           <path
             fill-rule="evenodd"
@@ -13,7 +15,8 @@
             clip-rule="evenodd"
           />
         </svg>
-      </button>
+        </button>
+      </div>
     </header>
     <div class="accent-line"></div>
 
@@ -41,6 +44,7 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import SyncStatus from '@/components/SyncStatus.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -114,6 +118,8 @@ function handleLogout() {
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
+
+.topbar-actions { display: flex; align-items: center; gap: 0.25rem; }
 
 .logout-btn:hover {
   color: var(--danger);

@@ -106,6 +106,8 @@ import { activeEventService } from '@/services/active-event.service'
 import BarLayout from '@/layouts/BarLayout.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import type { AttendeesResponse, Attendee } from '@/types'
+import { readEventCache, writeEventCache } from '@/services/event-cache.service'
+import { enqueueMutation } from '@/services/sync-queue.service'
 
 const toast = useToastStore()
 const loading = ref(false)
@@ -146,13 +148,20 @@ function err(e: unknown, fallback: string) {
 
 async function load() {
   loading.value = true
+  const cached = await readEventCache<{ attendees: AttendeesResponse; eventName: string }>('attendees')
+  if (cached) {
+    data.value = cached.attendees
+    eventName.value = cached.eventName
+    loading.value = false
+  }
   try {
     const [res, event] = await Promise.all([activeEventService.getAttendees(), activeEventService.getActive()])
     data.value = res
     eventName.value = event.name
+    await writeEventCache('attendees', { attendees: res, eventName: event.name })
   } catch (e) {
     if (axios.isAxiosError(e) && e.response?.status === 404) noActive.value = true
-    else toast.error(err(e, 'Error al cargar asistentes.'))
+    else if (!cached) toast.error(err(e, 'Error al cargar asistentes.'))
   } finally { loading.value = false }
 }
 
@@ -173,9 +182,18 @@ async function doPay() {
 
 async function applyConfirm(a: Attendee, confirmed: boolean) {
   try {
-    await activeEventService.updateAttendee(a.id, { confirmed })
-    data.value = await activeEventService.getAttendees()
-  } catch (e) { toast.error(err(e, 'Error al actualizar.')) }
+    const clientOperationId = await enqueueMutation({
+      method: 'patch',
+      url: `/events/active/attendees/${a.id}`,
+      data: { confirmed },
+    })
+    a.confirmed = confirmed
+    if (confirmed && a.role === 'usuario' && !a.payment && data.value) {
+      a.payment = { id: `pending-${clientOperationId}`, amount: String(data.value.price) }
+    }
+    if (data.value) await writeEventCache('attendees', { attendees: data.value, eventName: eventName.value })
+    toast.success(confirmed ? 'Confirmación guardada.' : 'Confirmación actualizada.')
+  } catch (e) { toast.error(err(e, 'No se pudo guardar la confirmación localmente.')) }
 }
 
 onMounted(load)

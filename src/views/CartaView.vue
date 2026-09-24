@@ -28,6 +28,8 @@ import { useToastStore } from '@/stores/toast'
 import { activeEventService } from '@/services/active-event.service'
 import BarLayout from '@/layouts/BarLayout.vue'
 import type { EventDrink } from '@/types'
+import { readEventCache, writeEventCache } from '@/services/event-cache.service'
+import { enqueueMutation } from '@/services/sync-queue.service'
 
 const toast = useToastStore()
 const loading = ref(false)
@@ -39,6 +41,12 @@ function err(e: unknown, msg: string) { return axios.isAxiosError(e) ? (e.respon
 
 async function load() {
   loading.value = true
+  const cached = await readEventCache<{ drinks: EventDrink[]; eventName: string }>('carta')
+  if (cached) {
+    eventDrinks.value = cached.drinks
+    eventName.value = cached.eventName
+    loading.value = false
+  }
   try {
     const [eds, event] = await Promise.all([
       activeEventService.getEventDrinks(),
@@ -46,17 +54,21 @@ async function load() {
     ])
     eventDrinks.value = eds
     eventName.value = event.name
+    await writeEventCache('carta', { drinks: eds, eventName: event.name })
   } catch (e) {
     if (axios.isAxiosError(e) && e.response?.status === 404) noActive.value = true
-    else toast.error(err(e, 'Error al cargar carta.'))
+    else if (!cached) toast.error(err(e, 'Error al cargar carta.'))
   } finally { loading.value = false }
 }
 
 async function toggleAvail(ed: EventDrink) {
   try {
-    await activeEventService.updateEventDrink(ed.id, { available: !ed.available })
-    eventDrinks.value = await activeEventService.getEventDrinks()
-  } catch (e) { toast.error(err(e, 'Error al actualizar.')) }
+    const available = !ed.available
+    await enqueueMutation({ method: 'patch', url: `/events/active/drinks/${ed.id}`, data: { available } })
+    ed.available = available
+    await writeEventCache('carta', { drinks: eventDrinks.value, eventName: eventName.value })
+    toast.success(available ? 'Bebida disponible.' : 'Bebida marcada como agotada.')
+  } catch (e) { toast.error(err(e, 'No se pudo guardar el cambio localmente.')) }
 }
 
 onMounted(load)

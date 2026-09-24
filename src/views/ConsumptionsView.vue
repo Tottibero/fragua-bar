@@ -171,10 +171,11 @@ import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
 import axios from 'axios'
 import { useToastStore } from '@/stores/toast'
 import { activeEventService } from '@/services/active-event.service'
-import { paymentsService } from '@/services/payments.service'
 import BarLayout from '@/layouts/BarLayout.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import type { ConsumptionsResponse, Attendee } from '@/types'
+import { readEventCache, writeEventCache } from '@/services/event-cache.service'
+import { enqueueMutation } from '@/services/sync-queue.service'
 
 const toast = useToastStore()
 const loading = ref(false)
@@ -294,6 +295,15 @@ function drinkPrice(eventDrinkId: string) {
 
 async function load() {
   loading.value = true
+  const cached = await readEventCache<{ consumptions: ConsumptionsResponse; attendees: Attendee[]; eventId: string; eventName: string; freeConsumption: boolean }>('consumptions')
+  if (cached) {
+    data.value = cached.consumptions
+    attendees.value = cached.attendees
+    eventId.value = cached.eventId
+    eventName.value = cached.eventName
+    freeConsumption.value = cached.freeConsumption
+    loading.value = false
+  }
   try {
     const [cons, att, event] = await Promise.all([
       activeEventService.getConsumptions(),
@@ -305,10 +315,22 @@ async function load() {
     eventId.value = event.id
     eventName.value = event.name
     freeConsumption.value = event.freeConsumption
+    await saveSnapshot()
   } catch (e) {
     if (axios.isAxiosError(e) && e.response?.status === 404) noActive.value = true
-    else toast.error(err(e, 'Error al cargar consumiciones.'))
+    else if (!cached) toast.error(err(e, 'Error al cargar consumiciones.'))
   } finally { loading.value = false }
+}
+
+function saveSnapshot() {
+  if (!data.value) return Promise.resolve()
+  return writeEventCache('consumptions', {
+    consumptions: data.value,
+    attendees: attendees.value,
+    eventId: eventId.value,
+    eventName: eventName.value,
+    freeConsumption: freeConsumption.value,
+  })
 }
 
 function isActive(attendeeId: string, action: typeof activeAction.value) {
@@ -336,38 +358,56 @@ function onKeyDown(e: KeyboardEvent) {
 async function confirmCanjear() {
   if (!canjearDrinkId.value || !activeAttendeeId.value) return
   try {
-    await activeEventService.addConsumption({ attendeeId: activeAttendeeId.value, eventDrinkId: canjearDrinkId.value, quantity: 1, isFree: true })
+    const attendeeId = activeAttendeeId.value
+    const eventDrinkId = canjearDrinkId.value
+    const clientOperationId = await enqueueMutation({ method: 'post', url: '/events/active/consumptions', data: { attendeeId, eventDrinkId, quantity: 1, isFree: true } })
+    const eventDrink = data.value?.eventDrinks.find(drink => drink.id === eventDrinkId)
+    if (data.value && eventDrink) data.value.consumptions.push({ id: `pending-${clientOperationId}`, attendeeId, eventDrinkId, quantity: 1, isFree: true, eventDrink })
+    const attendee = attendees.value.find(item => item.id === attendeeId)
+    if (attendee) attendee.freeConsumptionUsed = true
     closeModal()
-    await load()
-    toast.success('Consumición gratuita canjeada.')
-  } catch (e) { toast.error(err(e, 'Error al canjear.')) }
+    await saveSnapshot()
+    toast.success('Consumición gratuita guardada.')
+  } catch (e) { toast.error(err(e, 'No se pudo guardar el canje localmente.')) }
 }
 
 async function confirmAdd() {
   if (!addForm.eventDrinkId || !activeAttendeeId.value) return
   try {
-    await activeEventService.addConsumption({ attendeeId: activeAttendeeId.value, eventDrinkId: addForm.eventDrinkId, quantity: addForm.quantity })
+    const attendeeId = activeAttendeeId.value
+    const eventDrinkId = addForm.eventDrinkId
+    const quantity = addForm.quantity
+    const clientOperationId = await enqueueMutation({ method: 'post', url: '/events/active/consumptions', data: { attendeeId, eventDrinkId, quantity } })
+    const eventDrink = data.value?.eventDrinks.find(drink => drink.id === eventDrinkId)
+    if (data.value && eventDrink) data.value.consumptions.push({ id: `pending-${clientOperationId}`, attendeeId, eventDrinkId, quantity, isFree: false, eventDrink })
     closeModal()
-    data.value = await activeEventService.getConsumptions()
+    await saveSnapshot()
     toast.success('Consumición añadida.')
-  } catch (e) { toast.error(err(e, 'Error al añadir.')) }
+  } catch (e) { toast.error(err(e, 'No se pudo guardar la consumición localmente.')) }
 }
 
 async function confirmPay() {
   if (!activeRow.value || !payAmount.value || payAmount.value <= 0) return
   try {
-    await paymentsService.create({
-      userId: activeRow.value.userId,
-      type: 'consumption',
-      eventId: eventId.value,
-      amount: payAmount.value,
-      paidAt: new Date().toISOString().slice(0, 10),
+    const row = activeRow.value
+    const amount = payAmount.value
+    const clientOperationId = await enqueueMutation({
+      method: 'post',
+      url: '/payments',
+      data: {
+        userId: row.userId,
+        type: 'consumption',
+        eventId: eventId.value,
+        amount,
+        paidAt: new Date().toISOString().slice(0, 10),
+      },
     })
-    const nickname = activeRow.value.nickname
+    if (data.value) data.value.payments.push({ id: `pending-${clientOperationId}`, userId: row.userId, amount: String(amount) })
+    const nickname = row.nickname
     closeModal()
-    data.value = await activeEventService.getConsumptions()
-    toast.success(`Pago de ${payAmount.value.toFixed(2)} € registrado para ${nickname}.`)
-  } catch (e) { toast.error(err(e, 'Error al registrar pago.')) }
+    await saveSnapshot()
+    toast.success(`Pago de ${amount.toFixed(2)} € registrado para ${nickname}.`)
+  } catch (e) { toast.error(err(e, 'No se pudo guardar el pago localmente.')) }
 }
 
 onMounted(() => { load(); window.addEventListener('keydown', onKeyDown) })

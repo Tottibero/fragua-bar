@@ -54,6 +54,7 @@ export interface AttendeesResponse {
 
 export interface UpdateAttendeePayload {
   confirmed?: boolean
+  clientOperationId?: string
 }
 
 export interface CatalogDrink {
@@ -71,6 +72,7 @@ export interface EventDrink {
 
 export interface UpdateEventDrinkPayload {
   available?: boolean
+  clientOperationId?: string
 }
 
 export interface Consumption {
@@ -93,6 +95,7 @@ export interface CreateConsumptionPayload {
   eventDrinkId: string
   quantity: number
   isFree?: boolean
+  clientOperationId?: string
 }
 
 export interface CreatePaymentPayload {
@@ -101,4 +104,5 @@ export interface CreatePaymentPayload {
   eventId: string
   amount: number
   paidAt: string
+  clientOperationId?: string
 }
