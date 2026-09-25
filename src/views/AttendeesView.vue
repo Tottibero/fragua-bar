@@ -163,6 +163,10 @@ async function load() {
     data.value = res
     eventName.value = event.name
     await writeEventCache('attendees', { attendees: res, eventName: event.name })
+    void queryClient.prefetchQuery({
+      queryKey: [...activeEventQueryKey, 'drinks'],
+      queryFn: activeEventService.getEventDrinks,
+    })
   } catch (e) {
     if (axios.isAxiosError(e) && e.response?.status === 404) noActive.value = true
     else if (!cached) toast.error(err(e, 'Error al cargar asistentes.'))
