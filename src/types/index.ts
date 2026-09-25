@@ -50,6 +50,7 @@ export interface AttendeesResponse {
   price: number
   nonMemberCount: number
   totalRevenue: number
+  eventDrinks: EventDrink[]
 }
 
 export interface UpdateAttendeePayload {
