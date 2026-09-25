@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { UserRole } from '@/types'
 import { clearOfflineData } from '@/services/sync-queue.service'
+import { queryClient } from '@/services/query-client'
 
 interface AuthUser {
   id: string
@@ -27,6 +28,7 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = null
     localStorage.removeItem('auth_token')
     localStorage.removeItem('auth_user')
+    queryClient.clear()
     void clearOfflineData()
   }
 

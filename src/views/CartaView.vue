@@ -30,6 +30,7 @@ import BarLayout from '@/layouts/BarLayout.vue'
 import type { EventDrink } from '@/types'
 import { readEventCache, writeEventCache } from '@/services/event-cache.service'
 import { enqueueMutation } from '@/services/sync-queue.service'
+import { activeEventQueryKey, queryClient } from '@/services/query-client'
 
 const toast = useToastStore()
 const loading = ref(false)
@@ -49,8 +50,8 @@ async function load() {
   }
   try {
     const [eds, event] = await Promise.all([
-      activeEventService.getEventDrinks(),
-      activeEventService.getActive(),
+      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'drinks'], queryFn: activeEventService.getEventDrinks }),
+      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'event'], queryFn: activeEventService.getActive }),
     ])
     eventDrinks.value = eds
     eventName.value = event.name

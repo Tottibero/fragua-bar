@@ -108,6 +108,7 @@ import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import type { AttendeesResponse, Attendee } from '@/types'
 import { readEventCache, writeEventCache } from '@/services/event-cache.service'
 import { enqueueMutation } from '@/services/sync-queue.service'
+import { activeEventQueryKey, queryClient } from '@/services/query-client'
 
 const toast = useToastStore()
 const loading = ref(false)
@@ -155,7 +156,10 @@ async function load() {
     loading.value = false
   }
   try {
-    const [res, event] = await Promise.all([activeEventService.getAttendees(), activeEventService.getActive()])
+    const [res, event] = await Promise.all([
+      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'attendees'], queryFn: activeEventService.getAttendees }),
+      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'event'], queryFn: activeEventService.getActive }),
+    ])
     data.value = res
     eventName.value = event.name
     await writeEventCache('attendees', { attendees: res, eventName: event.name })

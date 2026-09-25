@@ -2,6 +2,7 @@ import axios from 'axios'
 import { shallowRef } from 'vue'
 import api from './api'
 import { offlineStore, type QueuedMutation } from './offline-store'
+import { activeEventQueryKey, queryClient } from './query-client'
 
 export const pendingMutationCount = shallowRef(0)
 export const failedMutationCount = shallowRef(0)
@@ -67,6 +68,7 @@ export async function flushMutationQueue() {
           headers: { 'Idempotency-Key': mutation.id },
         })
         await offlineStore.deleteMutation(mutation.id)
+        await queryClient.invalidateQueries({ queryKey: activeEventQueryKey })
       } catch (error) {
         const status = axios.isAxiosError(error) ? error.response?.status : undefined
         if (status === 401) {
