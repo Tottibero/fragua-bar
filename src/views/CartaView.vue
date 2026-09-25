@@ -28,6 +28,7 @@ import { useToastStore } from '@/stores/toast'
 import { activeEventService } from '@/services/active-event.service'
 import BarLayout from '@/layouts/BarLayout.vue'
 import type { EventDrink } from '@/types'
+import type { BarBootstrapResponse } from '@/types'
 import { readEventCache, writeEventCache } from '@/services/event-cache.service'
 import { enqueueMutation } from '@/services/sync-queue.service'
 import { activeEventQueryKey, queryClient } from '@/services/query-client'
@@ -49,13 +50,13 @@ async function load() {
     loading.value = false
   }
   try {
-    const [drinks, event] = await Promise.all([
-      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'drinks'], queryFn: activeEventService.getEventDrinks }),
-      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'event'], queryFn: activeEventService.getActive }),
+    const [drinks, bootstrap] = await Promise.all([
+      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'drinks'], queryFn: activeEventService.getBarDrinks }),
+      queryClient.fetchQuery<BarBootstrapResponse>({ queryKey: [...activeEventQueryKey, 'bootstrap'], queryFn: activeEventService.getBarBootstrap }),
     ])
     eventDrinks.value = drinks
-    eventName.value = event.name
-    await writeEventCache('carta', { drinks, eventName: event.name })
+    eventName.value = bootstrap.event.name
+    await writeEventCache('carta', { drinks, eventName: bootstrap.event.name })
   } catch (e) {
     if (axios.isAxiosError(e) && e.response?.status === 404) noActive.value = true
     else if (!cached) toast.error(err(e, 'Error al cargar carta.'))

@@ -105,7 +105,7 @@ import { useToastStore } from '@/stores/toast'
 import { activeEventService } from '@/services/active-event.service'
 import BarLayout from '@/layouts/BarLayout.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
-import type { AttendeesResponse, Attendee } from '@/types'
+import type { AttendeesResponse, Attendee, BarBootstrapResponse } from '@/types'
 import { readEventCache, writeEventCache } from '@/services/event-cache.service'
 import { enqueueMutation } from '@/services/sync-queue.service'
 import { activeEventQueryKey, queryClient } from '@/services/query-client'
@@ -156,16 +156,14 @@ async function load() {
     loading.value = false
   }
   try {
-    const [res, event] = await Promise.all([
-      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'attendees'], queryFn: activeEventService.getAttendees }),
-      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'event'], queryFn: activeEventService.getActive }),
-    ])
+    const bootstrap = await queryClient.fetchQuery<BarBootstrapResponse>({ queryKey: [...activeEventQueryKey, 'bootstrap'], queryFn: activeEventService.getBarBootstrap })
+    const res = { attendees: bootstrap.attendees, price: Number(bootstrap.event.price), nonMemberCount: bootstrap.attendees.filter(attendee => attendee.role === 'usuario').length, totalRevenue: 0 }
     data.value = res
-    eventName.value = event.name
-    await writeEventCache('attendees', { attendees: res, eventName: event.name })
+    eventName.value = bootstrap.event.name
+    await writeEventCache('attendees', { attendees: res, eventName: bootstrap.event.name })
     void queryClient.prefetchQuery({
       queryKey: [...activeEventQueryKey, 'drinks'],
-      queryFn: activeEventService.getEventDrinks,
+      queryFn: activeEventService.getBarDrinks,
     })
   } catch (e) {
     if (axios.isAxiosError(e) && e.response?.status === 404) noActive.value = true

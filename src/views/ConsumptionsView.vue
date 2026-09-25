@@ -173,7 +173,7 @@ import { useToastStore } from '@/stores/toast'
 import { activeEventService } from '@/services/active-event.service'
 import BarLayout from '@/layouts/BarLayout.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
-import type { ConsumptionsResponse, Attendee } from '@/types'
+import type { ConsumptionsResponse, Attendee, BarBootstrapResponse, BarLedgerResponse } from '@/types'
 import { readEventCache, writeEventCache } from '@/services/event-cache.service'
 import { enqueueMutation } from '@/services/sync-queue.service'
 import { activeEventQueryKey, queryClient } from '@/services/query-client'
@@ -306,16 +306,20 @@ async function load() {
     loading.value = false
   }
   try {
-    const [cons, att, event] = await Promise.all([
-      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'consumptions'], queryFn: activeEventService.getConsumptions }),
-      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'attendees'], queryFn: activeEventService.getAttendees }),
-      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'event'], queryFn: activeEventService.getActive }),
+    const [ledger, bootstrap, drinks] = await Promise.all([
+      queryClient.fetchQuery<BarLedgerResponse>({ queryKey: [...activeEventQueryKey, 'ledger'], queryFn: activeEventService.getBarLedger }),
+      queryClient.fetchQuery<BarBootstrapResponse>({ queryKey: [...activeEventQueryKey, 'bootstrap'], queryFn: activeEventService.getBarBootstrap }),
+      queryClient.fetchQuery({ queryKey: [...activeEventQueryKey, 'drinks'], queryFn: activeEventService.getBarDrinks }),
     ])
-    data.value = cons
-    attendees.value = att.attendees
-    eventId.value = event.id
-    eventName.value = event.name
-    freeConsumption.value = event.freeConsumption
+    data.value = {
+      consumptions: ledger.consumptions.map(consumption => ({ ...consumption, eventDrink: drinks.find(drink => drink.id === consumption.eventDrinkId)! })),
+      eventDrinks: drinks,
+      payments: ledger.consumptionPayments,
+    }
+    attendees.value = bootstrap.attendees
+    eventId.value = bootstrap.event.id
+    eventName.value = bootstrap.event.name
+    freeConsumption.value = bootstrap.event.freeConsumption
     await saveSnapshot()
   } catch (e) {
     if (axios.isAxiosError(e) && e.response?.status === 404) noActive.value = true

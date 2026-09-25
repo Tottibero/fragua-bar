@@ -90,6 +90,16 @@ export interface ConsumptionsResponse {
   payments: { id: string; userId: string; amount: string }[]
 }
 
+export interface BarBootstrapResponse {
+  event: Pick<Event, 'id' | 'name' | 'price' | 'freeConsumption'>
+  attendees: Attendee[]
+}
+
+export interface BarLedgerResponse {
+  consumptions: Omit<Consumption, 'eventDrink'>[]
+  consumptionPayments: ConsumptionsResponse['payments']
+}
+
 export interface CreateConsumptionPayload {
   attendeeId: string
   eventDrinkId: string
